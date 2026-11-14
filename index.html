@@ -23,7 +23,6 @@
   <button data-open="terminal">Terminal</button>
   <span class="spacer"></span>
   <button id="mode">Plain version</button>
-  <button id="ach-count" data-open="achievements">Achievements</button>
   <span id="clock"></span>
 </header>
 
@@ -96,11 +95,6 @@
     </div>
   </section>
 
-  <section class="window no-plain" id="w-achievements" data-x="640" data-y="80" style="width: 420px" hidden>
-    <div class="titlebar"><button class="close" aria-label="Close Achievements">x</button><span class="title">Achievements</span></div>
-    <div class="content"><ul class="ach-list" id="ach-list"></ul></div>
-  </section>
-
   <section class="window terminal" id="w-terminal" data-x="230" data-y="390" style="width: 520px">
     <div class="titlebar"><button class="close" aria-label="Close Terminal">x</button><span class="title">Terminal</span></div>
     <div class="content" id="term">
@@ -116,12 +110,10 @@
     <a class="icon" href="/games/"><span class="tile" style="background: var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="4"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/></svg></span><span class="label">Games</span></a>
     <button class="icon" data-open="projects"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></button>
     <button class="icon" data-open="terminal"><span class="tile" style="background: var(--ink); color: var(--paper)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 10l3 2-3 2M12 15h4"/></svg></span><span class="label">Terminal</span></button>
-    <button class="icon" data-open="achievements"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM12 14v4M8 20h8M7 6H4c0 3 1 4 3 4M17 6h3c0 3-1 4-3 4"/></svg></span><span class="label">Trophies</span></button>
   </nav>
 
 </main>
 
-<script src="/js/achievements.js"></script>
 <script src="/js/os.js"></script>
 </body>
 </html>

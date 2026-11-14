@@ -9,7 +9,6 @@ Static front end for rileycohn.com. No build step: plain HTML, CSS and JS.
 - The games themselves are deployed separately under `/games/<name>/` (for
   example `/games/duel-dle/`) and are not in this repo, so a deploy of this repo
   must never delete those folders.
-- `js/achievements.js` is shared by both pages and stores progress in localStorage.
 
 Run locally from the repo root (paths are root-relative):
 

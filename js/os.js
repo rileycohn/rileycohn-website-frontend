@@ -25,7 +25,6 @@
     w.hidden = false;
     if (!isPhone()) clamp(w);
     focus(w);
-    if (name === 'trash') Ach.unlock('diver');
     if (name === 'terminal' && !root.classList.contains('plain') && !isPhone()) input.focus({ preventScroll: true });
     if (root.classList.contains('plain')) w.scrollIntoView({ behavior: 'smooth' });
     return true;
@@ -40,10 +39,9 @@
     var bar = w.querySelector('.titlebar');
     bar.addEventListener('pointerdown', function (e) {
       if (e.target.closest('.close') || root.classList.contains('plain') || isPhone()) return;
-      var dx = e.clientX - w.offsetLeft, dy = e.clientY - w.offsetTop, moved = false;
+      var dx = e.clientX - w.offsetLeft, dy = e.clientY - w.offsetTop;
       bar.setPointerCapture(e.pointerId);
       function move(ev) {
-        moved = true;
         w.style.left = ev.clientX - dx + 'px';
         w.style.top = ev.clientY - dy + 'px';
         clamp(w);
@@ -52,7 +50,6 @@
         bar.removeEventListener('pointermove', move);
         bar.removeEventListener('pointerup', up);
         bar.removeEventListener('pointercancel', up);
-        if (moved) Ach.unlock('mover');
       }
       bar.addEventListener('pointermove', move);
       bar.addEventListener('pointerup', up);
@@ -99,35 +96,12 @@
   tick();
   setInterval(tick, 10000);
 
-  // ---- Achievements ----
-  var achBtn = document.getElementById('ach-count');
-  var achList = document.getElementById('ach-list');
-  function renderAch() {
-    achBtn.textContent = 'Achievements ' + Ach.count() + '/' + Ach.total;
-    achList.textContent = '';
-    Object.keys(Ach.list).forEach(function (id) {
-      var li = document.createElement('li');
-      var got = Ach.has(id);
-      if (!got) li.className = 'locked';
-      var box = document.createElement('span');
-      box.className = 'box';
-      box.textContent = got ? '[x]' : '[ ]';
-      var text = document.createElement('span');
-      text.textContent = got ? Ach.list[id][0] + ': ' + Ach.list[id][1] : '???';
-      li.append(box, text);
-      achList.appendChild(li);
-    });
-  }
-  document.addEventListener('achievement', renderAch);
-  renderAch();
-  setTimeout(function () { Ach.unlock('boot'); }, 1200);
-
   // ---- Terminal ----
   var term = document.getElementById('term');
   var log = document.getElementById('term-log');
   var form = document.getElementById('term-form');
   var input = document.getElementById('term-input');
-  var apps = ['projects', 'now', 'lab', 'guestbook', 'trash', 'achievements', 'about'];
+  var apps = ['projects', 'now', 'lab', 'guestbook', 'trash', 'about'];
 
   function print(text, cls) {
     var d = document.createElement('div');
@@ -143,7 +117,7 @@
     clear: function () { log.textContent = ''; },
     plain: function () { setPlain(true); },
     sudo: function () { return 'Nice try.'; },
-    secret: function () { Ach.unlock('curious'); return 'You found it. There are more.'; },
+    secret: function () { return 'You found it.'; },
     cd: function (arg) {
       var dir = (arg || '').replace(/\/$/, '');
       if (dir === 'games') { location.href = '/games/'; return 'Loading arcade...'; }
@@ -170,7 +144,6 @@
       var fn = commands[parts[0].toLowerCase()];
       var out = fn ? fn(parts[1]) : 'command not found: ' + parts[0] + '. Try help.';
       if (out) print(out, 'out');
-      Ach.unlock('hacker');
     }
     term.scrollTop = term.scrollHeight;
   });

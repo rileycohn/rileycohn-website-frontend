@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pupprs · Riley Cohn's Workshop</title>
+<meta name="description" content="Pupprs is a social network where every account is a dog. A cross-platform app for iOS, Android and web on a serverless AWS backend, designed, built and run by Riley Cohn.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17457a">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap">
+<link rel="stylesheet" href="/css/workshop.css">
+<link rel="stylesheet" href="/css/drawing.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/projects/">&lt; Back to the Workshop</a>
+</header>
+
+<main class="doc">
+
+  <!-- Sheet 1: the hero, laid out like a drawing with a title block -->
+  <section class="plate hero">
+    <svg class="drawing big" viewBox="0 0 240 150" role="img" aria-label="Sketch of a puppy's face">
+      <path d="M84 40c-22-8-36 6-34 30 2 16 10 26 20 28M156 40c22-8 36 6 34 30-2 16-10 26-20 28"/>
+      <path d="M84 40c10-14 62-14 72 0 10 16 12 44 2 62-10 16-66 16-76 0-10-18-8-46 2-62z"/>
+      <path d="M100 66h4M136 66h4M112 86h16l-8 8zM120 94v8M108 106c6 6 18 6 24 0"/>
+      <path d="M120 22v96" stroke-dasharray="4 4"/>
+      <path class="dim" d="M50 138h140M50 133v10M190 133v10M210 40v62M205 40h10M205 102h10"/>
+      <text x="120" y="134" text-anchor="middle">1 GOOD PUP</text>
+      <text x="222" y="74" text-anchor="start">ALL DOG</text>
+    </svg>
+    <div class="hero-text">
+      <h1>Pupprs</h1>
+      <p class="lede">The social network where every account is a dog.</p>
+      <p>Owners make a profile for each dog, then post photos, videos and stories as that dog. They follow other dogs, chat in DMs and group chats, and join community discussions. One app for iOS, Android and the web, on a serverless AWS backend I designed, built and run.</p>
+      <div class="actions">
+        <a class="btn" href="https://pupprs.com/">Visit pupprs.com &gt;</a>
+      </div>
+    </div>
+    <dl class="titleblock">
+      <div><dt>Project</dt><dd class="name">Pupprs</dd></div>
+      <div><dt>Type</dt><dd>Social app</dd></div>
+      <div><dt>Platforms</dt><dd>iOS · Android · Web</dd></div>
+      <div><dt>Role</dt><dd>Design, build, operate</dd></div>
+    </dl>
+  </section>
+
+  <!-- Measurements -->
+  <section class="specs" aria-label="By the numbers">
+    <div><span class="num">177k</span><span class="unit">lines of TypeScript</span></div>
+    <div><span class="num">40</span><span class="unit">or so Lambda functions</span></div>
+    <div><span class="num">450</span><span class="unit">or so test files and E2E specs</span></div>
+    <div><span class="num">$50</span><span class="unit">a month to run, roughly</span></div>
+  </section>
+
+  <!-- Key features as numbered callouts -->
+  <section class="section">
+    <h2><span class="tag">A</span>What it does</h2>
+    <div class="callouts">
+      <article>
+        <h3><span class="mark">1</span>Dogs are the accounts</h3>
+        <p>People follow dogs, not other people. One person can run several dogs, and a dog can have co-owners: a couple, a family or a dog walker, with an invite and accept flow.</p>
+      </article>
+      <article>
+        <h3><span class="mark">2</span>Posts, reels and stories</h3>
+        <p>Photo and video carousels, a GPU photo editor with filters and non-destructive edits, a video trimmer, drafts, and 24-hour stories with text, stickers and drawing.</p>
+      </article>
+      <article>
+        <h3><span class="mark">3</span>Real-time messaging</h3>
+        <p>One-to-one and group DMs over WebSockets, with message requests, read receipts, mute and admin roles. Push notifications deep-link to the right screen.</p>
+      </article>
+      <article>
+        <h3><span class="mark">4</span>Explore and Discuss</h3>
+        <p>A ranked global feed that blends engagement with recency decay, hashtag pages, typo-tolerant search, and a community forum with threads and polls.</p>
+      </article>
+      <article>
+        <h3><span class="mark">5</span>Your dog, as a cartoon</h3>
+        <p>Snap a photo and a vision model reads breed, build, coat and markings. That drives a dog drawn entirely in code: one SVG rig, tuned per breed, with six coat patterns and unlockable accessories.</p>
+      </article>
+      <article>
+        <h3><span class="mark">6</span>Dogs only, and safe</h3>
+        <p>Every report goes to a multimodal AI moderator that enforces the dogs-only rule and the safety rules. When it isn't sure, it escalates to a human instead of removing.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Architecture as a schematic -->
+  <section class="section">
+    <h2><span class="tag">B</span>Schematic</h2>
+    <p class="note">One TypeScript monorepo, five packages. Zod schemas are shared by the app and the API, so validation is identical on both sides.</p>
+    <figure class="schematic">
+<pre aria-label="Architecture diagram">
+ iOS / Android / Web  (Expo + React Native)
+          │  HTTPS + WSS
+          ▼
+   CloudFront ── WAF ── S3 (web app, media)
+     │
+     ├── API Gateway REST ─► ~25 domain Lambdas ─► RDS Postgres 16
+     │        │  Cognito authorizer                    ▲
+     │        └─► EventBridge ─► notifications / push ─► Expo Push
+     │
+     └── API Gateway WebSocket ─► DM Lambdas ─► DynamoDB
+
+   S3 upload ─► SQS ─► media workers (sharp / ffmpeg)
+   Reports   ─► SQS ─► moderation worker ─► Amazon Bedrock
+   Pet photo ─────────────────────────────► Amazon Bedrock
+   Alarms    ─► SNS ─► alarm bridge ─► GitHub Issues
+   CodePipeline ─► synth tests ─► approval ─► prod ─► smoke test
+</pre>
+      <figcaption>Fig. B1. Request, event and async paths. Every queue has a dead-letter queue with alarms.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Engineering stories as detail views -->
+  <section class="section">
+    <h2><span class="tag">C</span>Details</h2>
+    <div class="details">
+      <article>
+        <h3>Detail C1 · Cutting RDS Proxy</h3>
+        <p>Lambdas talk to Postgres directly with a pool of exactly one connection per warm container. Idle reaping on the server and an alarm on connection count keep it inside a micro instance. That, a NAT instance instead of a NAT Gateway, and tight log and trace sampling keep the bill near $50 a month.</p>
+      </article>
+      <article>
+        <h3>Detail C2 · Moderation that resists prompt injection</h3>
+        <p>User captions are untrusted input to an LLM. They go in delimited blocks, and delimiter sequences inside them are neutralised, so a crafted caption can't break out and inject instructions or fake a verdict.</p>
+      </article>
+      <article>
+        <h3>Detail C3 · One ID from tap to database</h3>
+        <p>Every request carries a correlation ID. A Sentry error in the browser links to every Lambda log line it caused with one paste into Logs Insights.</p>
+      </article>
+      <article>
+        <h3>Detail C4 · Alarms that file their own tickets</h3>
+        <p>CloudWatch alarms open labelled GitHub issues, fold flapping alarms into one thread, and close the issue when the alarm clears. A backstop alarm emails if the bridge itself breaks.</p>
+      </article>
+      <article>
+        <h3>Detail C5 · Built with AI agents</h3>
+        <p>Features are built with Claude Code. Every pull request gets four parallel AI reviews (security, scalability, code quality and a user persona) and ships with a Playwright test run against the deployed stack.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Parts list -->
+  <section class="section">
+    <h2><span class="tag">D</span>Parts list</h2>
+    <div class="parts-wrap">
+      <table class="parts">
+        <thead><tr><th scope="col">Item</th><th scope="col">Part</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Client</th><td>TypeScript, React Native, Expo, Expo Router, React 19, TanStack Query, NativeWind, Skia, Reanimated, Sentry</td></tr>
+          <tr><th scope="row">Backend</th><td>Node.js, AWS Lambda, API Gateway (REST and WebSocket), PostgreSQL on RDS, DynamoDB, S3, SQS, EventBridge, Cognito, SES, Zod</td></tr>
+          <tr><th scope="row">AI</th><td>Amazon Bedrock (Converse API, multimodal)</td></tr>
+          <tr><th scope="row">Infra and ops</th><td>AWS CDK, CodePipeline, CloudFront, WAF, CloudWatch, X-Ray, Powertools, Synthetics, KMS, Secrets Manager</td></tr>
+          <tr><th scope="row">Testing</th><td>Vitest, Jest, React Native Testing Library, Playwright</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="plate closing">
+    <p>See it for yourself. Bring a dog.</p>
+    <a class="btn" href="https://pupprs.com/">Visit pupprs.com &gt;</a>
+  </section>
+
+</main>
+</body>
+</html>

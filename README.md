@@ -17,3 +17,9 @@ Static front end for rileycohn.com. No build step: plain HTML, CSS and JS.
 Run locally from the repo root (paths are root-relative):
 
     python3 -m http.server 8000
+
+Deploy (needs AWS credentials that can write the site bucket and invalidate
+CloudFront). Uploads only, never deletes, so separately deployed games stay put:
+
+    scripts/deploy.sh --dry-run   # show what would change
+    scripts/deploy.sh

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How Pupprs is built · Riley Cohn</title>
+<meta name="description" content="The architecture and tech stack behind Pupprs: a universal Expo app on a serverless, event-driven AWS backend with AI on Amazon Bedrock.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ff6b35">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="stylesheet" href="/projects/pupprs/pupprs.css">
+</head>
+<body>
+
+<header class="hero compact">
+  <nav class="crumbs">
+    <a href="/projects/">&lt; Riley's projects</a>
+    <span class="switch" role="group" aria-label="View">
+      <a href="/projects/pupprs/">Overview</a>
+      <a href="/projects/pupprs/technical/" aria-current="page">Technical</a>
+    </span>
+  </nav>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <img class="wordmark" src="/projects/pupprs/wordmark-white.png" alt="Pupprs" width="1001" height="359">
+      <h1>How Pupprs is built.</h1>
+      <p>A universal Expo app for iOS, Android and the web, on a serverless, event-driven AWS backend. Everything is TypeScript, from the screens to the infrastructure.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="section">
+    <div class="section-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>Every path through the system.</h2>
+      <p>Requests go through CloudFront to one Lambda per domain. Anything slow or fan-out happens asynchronously on queues and events, and every queue has a dead-letter queue with alarms.</p>
+    </div>
+
+    <ul class="legend" aria-label="Legend">
+      <li><span class="node k-client"></span>Client</li>
+      <li><span class="node k-edge"></span>Edge and gateway</li>
+      <li><span class="node k-compute"></span>Compute</li>
+      <li><span class="node k-data"></span>Data and queues</li>
+      <li><span class="node k-ai"></span>AI</li>
+      <li><span class="node k-ext"></span>External</li>
+    </ul>
+
+    <div class="arch">
+
+      <div class="lane-group">
+        <h3>Request path</h3>
+        <div class="lane">
+          <p class="lane-name">API</p>
+          <ol class="flow">
+            <li class="node k-client"><b>App</b><small>iOS · Android · Web</small></li>
+            <li class="node k-edge"><b>CloudFront</b><small>WAF · CSP · one domain</small></li>
+            <li class="node k-edge"><b>API Gateway REST</b><small>Cognito authorizer</small></li>
+            <li class="node k-compute"><b>Domain Lambdas</b><small>one per domain · Node 20</small></li>
+            <li class="node k-data"><b>RDS Postgres 16</b><small>repositories · keyset cursors</small></li>
+          </ol>
+        </div>
+        <div class="lane">
+          <p class="lane-name">Real-time</p>
+          <ol class="flow">
+            <li class="node k-client"><b>App</b><small>DMs and group chats</small></li>
+            <li class="node k-edge"><b>API Gateway WebSocket</b><small>WSS</small></li>
+            <li class="node k-compute"><b>DM Lambdas</b><small>message fan-out</small></li>
+            <li class="node k-data"><b>DynamoDB</b><small>live connections</small></li>
+          </ol>
+        </div>
+        <div class="lane">
+          <p class="lane-name">Web app</p>
+          <ol class="flow">
+            <li class="node k-client"><b>Browser</b><small>Expo web build</small></li>
+            <li class="node k-edge"><b>CloudFront</b><small>cached at the edge</small></li>
+            <li class="node k-data"><b>S3</b><small>static app and media</small></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="lane-group">
+        <h3>Async pipelines</h3>
+        <div class="lane">
+          <p class="lane-name">Media</p>
+          <ol class="flow">
+            <li class="node k-client"><b>App</b><small>presigned POST</small></li>
+            <li class="node k-data"><b>S3</b><small>raw upload</small></li>
+            <li class="node k-data"><b>SQS</b><small>with DLQ</small></li>
+            <li class="node k-compute"><b>Media workers</b><small>sharp · ffmpeg containers</small></li>
+            <li class="node k-data"><b>S3</b><small>thumbnails · transcodes</small></li>
+          </ol>
+        </div>
+        <div class="lane">
+          <p class="lane-name">Notifications</p>
+          <ol class="flow">
+            <li class="node k-compute"><b>Domain Lambdas</b><small>follow · like · comment · tag</small></li>
+            <li class="node k-data"><b>EventBridge</b><small>domain events</small></li>
+            <li class="node k-compute"><b>Notification writers</b><small>in-app · push · email</small></li>
+            <li class="node k-ext"><b>Expo Push</b><small>receipts poller prunes tokens</small></li>
+          </ol>
+        </div>
+        <div class="lane">
+          <p class="lane-name">Moderation</p>
+          <ol class="flow">
+            <li class="node k-client"><b>Report</b><small>post · comment · message</small></li>
+            <li class="node k-data"><b>SQS</b><small>with DLQ</small></li>
+            <li class="node k-compute"><b>Moderation worker</b><small>images and text</small></li>
+            <li class="node k-ai"><b>Amazon Bedrock</b><small>remove · warn · escalate · dismiss</small></li>
+            <li class="node k-data"><b>Postgres</b><small>verdict saved</small></li>
+          </ol>
+        </div>
+        <div class="lane">
+          <p class="lane-name">Virtual pet</p>
+          <ol class="flow">
+            <li class="node k-client"><b>Dog photo</b><small>from the camera</small></li>
+            <li class="node k-compute"><b>Pet Lambda</b><small></small></li>
+            <li class="node k-ai"><b>Amazon Bedrock</b><small>vision to strict JSON</small></li>
+            <li class="node k-client"><b>SVG dog rig</b><small>drawn in code on device</small></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="lane-group">
+        <h3>Operations</h3>
+        <div class="lane">
+          <p class="lane-name">Alerting</p>
+          <ol class="flow">
+            <li class="node k-data"><b>CloudWatch</b><small>alarms · canaries</small></li>
+            <li class="node k-data"><b>SNS</b><small>P1 · P2 topics</small></li>
+            <li class="node k-compute"><b>Alarm bridge</b><small>dedupe · auto-close</small></li>
+            <li class="node k-ext"><b>GitHub Issues</b><small>labelled incidents</small></li>
+          </ol>
+        </div>
+        <div class="lane">
+          <p class="lane-name">Delivery</p>
+          <ol class="flow">
+            <li class="node k-ext"><b>Git push</b><small>monorepo</small></li>
+            <li class="node k-edge"><b>CodePipeline</b><small>self-mutating CDK</small></li>
+            <li class="node k-compute"><b>Synth tests</b><small>then beta</small></li>
+            <li class="node k-ext"><b>Approval</b><small>PromoteToProd</small></li>
+            <li class="node k-edge"><b>Prod</b><small>post-deploy smoke test</small></li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="section">
+      <div class="section-head">
+        <p class="eyebrow">Tech stack</p>
+        <h2>What it's made of, and why.</h2>
+        <p>One npm-workspaces monorepo with five packages. Zod schemas in the shared package define every API contract, so the app and the backend validate the same way.</p>
+      </div>
+
+      <div class="stack-grid">
+        <article>
+          <h3>App</h3>
+          <dl>
+            <div><dt>Expo + React Native</dt><dd>One codebase for iOS, Android and the web</dd></div>
+            <div><dt>Expo Router</dt><dd>File-based routes and deep links</dd></div>
+            <div><dt>React 19</dt><dd>UI</dd></div>
+            <div><dt>TanStack Query</dt><dd>Server state and optimistic updates</dd></div>
+            <div><dt>NativeWind</dt><dd>Tailwind styling, light and dark themes</dd></div>
+            <div><dt>React Native Skia</dt><dd>GPU photo editor and filters</dd></div>
+            <div><dt>Reanimated</dt><dd>Gestures and animation</dd></div>
+            <div><dt>react-native-svg</dt><dd>The code-drawn cartoon dog</dd></div>
+            <div><dt>Sentry</dt><dd>Crash and performance monitoring</dd></div>
+          </dl>
+        </article>
+        <article>
+          <h3>Backend</h3>
+          <dl>
+            <div><dt>AWS Lambda</dt><dd>One function per domain, no framework</dd></div>
+            <div><dt>API Gateway</dt><dd>REST for the API, WebSocket for chat</dd></div>
+            <div><dt>PostgreSQL on RDS</dt><dd>Repository layer, trigger-kept counters, trigram search</dd></div>
+            <div><dt>DynamoDB</dt><dd>WebSocket connection tracking</dd></div>
+            <div><dt>S3</dt><dd>Presigned uploads and media</dd></div>
+            <div><dt>SQS</dt><dd>Work queues, each with a dead-letter queue</dd></div>
+            <div><dt>EventBridge</dt><dd>Domain events routed to notifications</dd></div>
+            <div><dt>Cognito</dt><dd>Sign-up, login and token auth</dd></div>
+            <div><dt>Zod</dt><dd>Shared request validation</dd></div>
+          </dl>
+        </article>
+        <article>
+          <h3>AI</h3>
+          <dl>
+            <div><dt>Amazon Bedrock</dt><dd>Multimodal moderation and dog-photo vision</dd></div>
+            <div><dt>Converse API</dt><dd>The model is a config value, not a code change</dd></div>
+          </dl>
+          <h3>Testing</h3>
+          <dl>
+            <div><dt>Vitest</dt><dd>Handlers and repositories against real Postgres</dd></div>
+            <div><dt>Jest + Testing Library</dt><dd>Components and screens</dd></div>
+            <div><dt>Playwright</dt><dd>End to end against the deployed stack</dd></div>
+          </dl>
+        </article>
+        <article>
+          <h3>Infrastructure and ops</h3>
+          <dl>
+            <div><dt>AWS CDK</dt><dd>All infrastructure as TypeScript</dd></div>
+            <div><dt>CodePipeline</dt><dd>Self-mutating deploys with an approval gate</dd></div>
+            <div><dt>CloudFront + WAF</dt><dd>One domain for app, media and API</dd></div>
+            <div><dt>CloudWatch + X-Ray</dt><dd>Structured logs, metrics and traces</dd></div>
+            <div><dt>Powertools</dt><dd>Logging, metrics and PII redaction in every Lambda</dd></div>
+            <div><dt>Synthetics</dt><dd>Uptime canaries</dd></div>
+            <div><dt>KMS + Secrets Manager</dt><dd>Encryption and credentials</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <p class="eyebrow">Design notes</p>
+      <h2>A few decisions worth explaining.</h2>
+    </div>
+    <div class="features notes">
+      <article>
+        <h3>Moderation that resists prompt injection</h3>
+        <p>Captions are untrusted input to an LLM. They go in delimited blocks with delimiter sequences neutralised, so a crafted caption can't inject instructions or fake a verdict. When the model isn't sure, it escalates to a human.</p>
+      </article>
+      <article>
+        <h3>A dog drawn entirely in code</h3>
+        <p>Bedrock returns breed, coat and markings as strict JSON. That drives one parametric SVG rig, tuned per breed, with six coat patterns and no image assets.</p>
+      </article>
+      <article>
+        <h3>One ID from tap to database</h3>
+        <p>Every request carries a correlation ID, so a Sentry error in the browser links to every Lambda log line it caused.</p>
+      </article>
+      <article>
+        <h3>Alarms that file their own tickets</h3>
+        <p>CloudWatch alarms open labelled GitHub issues, fold flapping alarms into one thread, and close the issue when the alarm clears.</p>
+      </article>
+      <article>
+        <h3>Built with AI agents</h3>
+        <p>Features are built with Claude Code. Every pull request gets parallel AI reviews for security, scalability, code quality and user experience, and ships with an end-to-end test.</p>
+      </article>
+      <article>
+        <h3>Least privilege everywhere</h3>
+        <p>Each Lambda gets only the permissions it needs: Bedrock access to one model, S3 access to specific prefixes, uploads scoped to the caller and checked by file signature.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>Try it yourself.</h2>
+    <div class="cta">
+      <a class="pill solid" href="https://apps.apple.com/us/app/pupprs/id6769940714">App Store</a>
+      <a class="pill solid" href="https://play.google.com/store/apps/details?id=com.pupprs.app">Google Play</a>
+      <a class="pill ghost" href="https://pupprs.com/">pupprs.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot"><a href="/projects/pupprs/">&lt; Back to the Pupprs overview</a></footer>
+
+</body>
+</html>

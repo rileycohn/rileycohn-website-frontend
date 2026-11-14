@@ -1,68 +1,51 @@
-/* Arcade: dark room, yellow marquee, CRT screen, cartridge shelf. */
+/* Arcade: dark room, yellow marquee, a shelf of cartridges that link to games. */
 :root {
-  --room: #14101f; --cab: #2b2140; --crt: #07060d; --text: #f4f1ff; --dim: #b9b0d9;
-  --yellow: #ffd23f; --red: #ff3b6b; --cyan: #3bf0ff; --green: #7dff8a; --ink: #14101f;
+  --room: #14101f; --cab: #2b2140; --text: #f4f1ff; --dim: #b9b0d9;
+  --yellow: #ffd23f; --red: #ff3b6b; --cyan: #3bf0ff; --ink: #14101f;
   --arcade: 'Press Start 2P', monospace;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { background: var(--room); color: var(--text); font: 12px/1.6 var(--arcade); min-height: 100vh; }
-button { font: inherit; color: inherit; cursor: pointer; }
-:focus-visible { outline: 3px dashed var(--cyan); outline-offset: 3px; }
-h1, h2, p { margin: 0; }
+body {
+  min-height: 100vh; color: var(--text); font: 12px/1.6 var(--arcade);
+  background: var(--room) repeating-linear-gradient(rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 4px);
+}
+:focus-visible { outline: 3px dashed var(--cyan); outline-offset: 4px; }
+h1, p { margin: 0; }
 
 .topbar { padding: 12px 16px 0; }
 .topbar a { color: var(--dim); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
 .topbar a:hover { color: var(--text); }
 
-.floor { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 32px 48px; padding: 8px 16px 48px; }
-
-.cabinet { width: 100%; max-width: 640px; display: flex; flex-direction: column; gap: 16px; }
+.arcade { max-width: 880px; margin: 0 auto; padding: 8px 16px 64px; display: flex; flex-direction: column; gap: 36px; }
 .marquee {
-  padding: 18px 12px; text-align: center; font-size: clamp(14px, 4vw, 24px); line-height: 1.3;
-  background: var(--yellow); color: var(--ink); border: 6px solid var(--cab); border-radius: 0 0 16px 16px;
+  padding: 22px 12px; text-align: center; font-size: clamp(16px, 4.5vw, 32px); line-height: 1.3;
+  background: var(--yellow); color: var(--ink); border: 6px solid var(--cab); border-radius: 0 0 18px 18px;
   text-shadow: 3px 3px 0 var(--red);
 }
-.bezel { background: var(--cab); border-radius: 28px; padding: 20px; }
-#screen {
-  display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--crt); border-radius: 16px;
-  image-rendering: pixelated; box-shadow: 0 0 40px rgba(59, 240, 255, 0.2);
-}
-.panel { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 8px; }
-.dpad { display: grid; grid-template: '. u .' 44px 'l . r' 44px '. d .' 44px / 44px 44px 44px; }
-.dpad button { background: var(--cab); border: 0; border-radius: 8px; touch-action: none; }
-.dpad button:active, .dpad button.down { background: var(--cyan); }
-.a-btn {
-  width: 76px; height: 76px; border-radius: 50%; background: var(--red); color: var(--ink);
-  border: 6px solid var(--cab); font-size: 18px; touch-action: none;
-}
-.a-btn:active, .a-btn.down { background: var(--yellow); }
-.slot {
-  flex: 1; max-width: 260px; display: flex; flex-direction: column; align-items: center; gap: 10px;
-  padding: 12px; border: 4px solid var(--cab); border-radius: 12px; text-align: center; font-size: 10px;
-}
-#slot-label { color: var(--yellow); }
-#eject { min-height: 44px; padding: 0 16px; background: none; border: 3px solid var(--dim); color: var(--dim); font-size: 10px; }
-#eject:not(:disabled):hover { border-color: var(--text); color: var(--text); }
-#eject:disabled { opacity: 0.4; cursor: default; }
-.hint { color: var(--dim); font-size: 10px; text-align: center; }
+.prompt { text-align: center; font-size: 14px; color: var(--yellow); animation: blink 1.2s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0.35; } }
 
-.shelf { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 20px; padding-top: 12px; }
-.shelf h2 { font-size: 14px; color: var(--yellow); }
-.carts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 18px; }
+.carts { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 36px 28px; }
 .cart {
-  min-height: 170px; padding: 12px 12px 0; display: flex; flex-direction: column; gap: 8px; text-align: left;
-  background: var(--c, var(--dim)); color: var(--ink); border: 4px solid #000; border-radius: 8px 8px 16px 16px;
-  box-shadow: 0 8px 0 #000; transition: transform 0.15s;
+  min-height: 280px; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 10px;
+  background: var(--c, var(--dim)); color: var(--ink); text-decoration: none;
+  border: 4px solid #000; border-radius: 8px 8px 18px 18px; box-shadow: 0 10px 0 #000;
+  transition: transform 0.15s;
 }
-.cart:hover { transform: translateY(-6px); }
+a.cart:hover, a.cart:focus-visible { transform: translateY(-10px) rotate(-1.5deg); }
+a.cart:active { transform: translateY(8px); box-shadow: 0 2px 0 #000; }
 .cart .grip { height: 8px; background: repeating-linear-gradient(90deg, #000 0 14px, transparent 14px 20px); }
 .cart .sticker {
-  flex: 1; margin-bottom: 12px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+  flex: 1; margin-bottom: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px;
   background: #fff6e5; border: 3px solid #000; border-radius: 6px;
 }
-.cart .name { font-size: 12px; line-height: 1.4; }
-.cart .blurb, .cart .best { font: 12px/1.3 'Silkscreen', monospace; }
-.cart.in { transform: translateY(10px); box-shadow: 0 0 0 #000; opacity: 0.55; }
+.cart .name { font-size: 16px; line-height: 1.4; }
+.cart .blurb { font: 14px/1.35 'Silkscreen', monospace; }
+.cart .play { margin-top: auto; align-self: flex-start; padding: 8px 10px; background: var(--ink); color: var(--yellow); font-size: 10px; }
+.cart.empty {
+  align-items: center; justify-content: center; padding: 14px; background: none; color: var(--dim);
+  border: 4px dashed var(--cab); box-shadow: none; font-size: 10px;
+}
 
-@media (prefers-reduced-motion: reduce) { .cart { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .cart { transition: none; } .prompt { animation: none; } }

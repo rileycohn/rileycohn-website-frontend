@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Riley Cohn Arcade</title>
-<meta name="description" content="Small browser games by Riley Cohn. Pick a cartridge and play.">
+<meta name="description" content="Games by Riley Cohn. Pick a cartridge and play.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#14101f">
 <link rel="apple-touch-icon" href="/icon.png">
@@ -18,40 +18,30 @@
   <a href="/">&lt; Back to RileyOS</a>
 </header>
 
-<main class="floor">
+<main class="arcade">
+  <h1 class="marquee">RILEY COHN ARCADE</h1>
+  <p class="prompt">PICK A CARTRIDGE</p>
 
-  <section class="cabinet" aria-label="Arcade cabinet">
-    <h1 class="marquee">RILEY COHN ARCADE</h1>
-    <div class="bezel">
-      <canvas id="screen" width="320" height="240" role="img" aria-label="Game screen"></canvas>
-    </div>
-    <div class="panel">
-      <div class="dpad" aria-label="Direction pad">
-        <button data-key="up" aria-label="Up" style="grid-area: u"></button>
-        <button data-key="left" aria-label="Left" style="grid-area: l"></button>
-        <button data-key="right" aria-label="Right" style="grid-area: r"></button>
-        <button data-key="down" aria-label="Down" style="grid-area: d"></button>
-      </div>
-      <div class="slot">
-        <span id="slot-label">NO CARTRIDGE</span>
-        <button id="eject" disabled>EJECT</button>
-      </div>
-      <button class="a-btn" data-key="a" aria-label="A button">A</button>
-    </div>
-    <p class="hint">Arrows or WASD to move. Space is the A button.</p>
-  </section>
-
-  <section class="shelf" aria-label="Cartridges">
-    <h2>PICK A CARTRIDGE</h2>
-    <div id="carts" class="carts"></div>
-  </section>
-
+  <!-- To add a game: copy a .cart link, point href at the game's folder, and set its colour with --c. -->
+  <div class="carts">
+    <a class="cart" href="/games/duel-dle/" style="--c: #ff3b6b">
+      <span class="grip"></span>
+      <span class="sticker">
+        <span class="name">Duel-dle</span>
+        <span class="blurb">Draw an attack. Draw a defense. An AI judge decides who wins. A new enemy every day.</span>
+        <span class="play">Play &gt;</span>
+      </span>
+    </a>
+    <div class="cart empty"><span>EMPTY SLOT</span></div>
+    <div class="cart empty"><span>EMPTY SLOT</span></div>
+  </div>
 </main>
 
 <script src="/js/achievements.js"></script>
-<script src="/js/arcade.js"></script>
-<script src="/games/carts/rockfall.js"></script>
-<script src="/games/carts/byteworm.js"></script>
-<script src="/games/carts/mystery.js"></script>
+<script>
+  document.querySelectorAll('a.cart').forEach(function (c) {
+    c.addEventListener('click', function () { Ach.unlock('player'); });
+  });
+</script>
 </body>
 </html>

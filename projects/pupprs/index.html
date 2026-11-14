@@ -2,96 +2,127 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Pupprs · Riley Cohn's Workshop</title>
-<meta name="description" content="Pupprs is a social network where every account is a dog. A cross-platform app for iOS, Android and web on a serverless AWS backend, designed, built and run by Riley Cohn.">
+<title>Pupprs · Riley Cohn</title>
+<meta name="description" content="Pupprs is the social network where every account is a dog. One app for iOS, Android and the web on a serverless AWS backend, designed, built and run by Riley Cohn.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#17457a">
+<meta name="theme-color" content="#ff6b35">
 <link rel="apple-touch-icon" href="/icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap">
-<link rel="stylesheet" href="/css/workshop.css">
-<link rel="stylesheet" href="/css/drawing.css">
+<link rel="stylesheet" href="/projects/pupprs/pupprs.css">
 </head>
 <body>
 
-<header class="topbar">
-  <a href="/projects/">&lt; Back to the Workshop</a>
-</header>
-
-<main class="doc">
-
-  <!-- Sheet 1: the hero, laid out like a drawing with a title block -->
-  <section class="plate hero">
-    <svg class="drawing big" viewBox="0 0 240 150" role="img" aria-label="Sketch of a puppy's face">
-      <path d="M84 40c-22-8-36 6-34 30 2 16 10 26 20 28M156 40c22-8 36 6 34 30-2 16-10 26-20 28"/>
-      <path d="M84 40c10-14 62-14 72 0 10 16 12 44 2 62-10 16-66 16-76 0-10-18-8-46 2-62z"/>
-      <path d="M100 66h4M136 66h4M112 86h16l-8 8zM120 94v8M108 106c6 6 18 6 24 0"/>
-      <path d="M120 22v96" stroke-dasharray="4 4"/>
-      <path class="dim" d="M50 138h140M50 133v10M190 133v10M210 40v62M205 40h10M205 102h10"/>
-      <text x="120" y="134" text-anchor="middle">1 GOOD PUP</text>
-      <text x="222" y="74" text-anchor="start">ALL DOG</text>
-    </svg>
-    <div class="hero-text">
-      <h1>Pupprs</h1>
-      <p class="lede">The social network where every account is a dog.</p>
-      <p>Owners make a profile for each dog, then post photos, videos and stories as that dog. They follow other dogs, chat in DMs and group chats, and join community discussions. One app for iOS, Android and the web, on a serverless AWS backend I designed, built and run.</p>
-      <div class="actions">
-        <a class="btn" href="https://pupprs.com/">Visit pupprs.com &gt;</a>
+<header class="hero">
+  <nav class="crumbs"><a href="/projects/">&lt; Riley's projects</a></nav>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <img class="wordmark" src="/projects/pupprs/wordmark-white.png" alt="Pupprs" width="1001" height="359">
+      <h1>The social network where every account is a dog.</h1>
+      <p>Owners make a profile for each dog, then post photos, videos and stories as that dog. Follow other dogs, chat in DMs and group chats, and join the community. One app for iOS, Android and the web.</p>
+      <div class="cta">
+        <a class="pill solid" href="https://apps.apple.com/us/app/pupprs/id6769940714">Download on the App Store</a>
+        <a class="pill solid" href="https://play.google.com/store/apps/details?id=com.pupprs.app">Get it on Google Play</a>
+        <a class="pill ghost" href="https://pupprs.com/">Open on the web</a>
       </div>
     </div>
-    <dl class="titleblock">
-      <div><dt>Project</dt><dd class="name">Pupprs</dd></div>
-      <div><dt>Type</dt><dd>Social app</dd></div>
-      <div><dt>Platforms</dt><dd>iOS · Android · Web</dd></div>
-      <div><dt>Role</dt><dd>Design, build, operate</dd></div>
-    </dl>
+
+    <!-- Illustration of the app, not a screenshot. -->
+    <div class="phone" aria-hidden="true">
+      <div class="screen">
+        <div class="app-top"><span class="app-name">pupprs</span></div>
+        <div class="stories">
+          <span class="ring"><span style="background: #ffd8c7"></span></span>
+          <span class="ring"><span style="background: #f6e3b4"></span></span>
+          <span class="ring"><span style="background: #d9e7f5"></span></span>
+          <span class="ring seen"><span style="background: #e7dcf4"></span></span>
+          <span class="ring seen"><span style="background: #dff0e0"></span></span>
+        </div>
+        <div class="post">
+          <div class="post-head"><span class="avatar"></span><span><b>Biscuit</b><br><small>Corgi · 3 yrs</small></span></div>
+          <div class="post-media">
+            <svg viewBox="0 0 200 170">
+              <ellipse cx="100" cy="150" rx="62" ry="10" fill="#f0d6c9"/>
+              <path d="M52 52 40 8l38 26zM148 52l12-44-38 26z" fill="#e8893f" stroke="#7a3b16" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M50 70c0-34 22-46 50-46s50 12 50 46c0 40-22 70-50 70S50 110 50 70z" fill="#f29a52" stroke="#7a3b16" stroke-width="4"/>
+              <path d="M100 50c-10 0-16 20-16 34 0 26 6 52 16 52s16-26 16-52c0-14-6-34-16-34z" fill="#fff6ee"/>
+              <path d="M70 108c6 20 18 30 30 30s24-10 30-30c-8 6-18 10-30 10s-22-4-30-10z" fill="#fff6ee"/>
+              <circle cx="80" cy="76" r="6" fill="#2a1a10"/><circle cx="120" cy="76" r="6" fill="#2a1a10"/>
+              <circle cx="82" cy="74" r="2" fill="#fff"/><circle cx="122" cy="74" r="2" fill="#fff"/>
+              <path d="M92 96h16l-8 8z" fill="#2a1a10"/>
+              <path d="M100 104v6M90 112c5 5 15 5 20 0" fill="none" stroke="#2a1a10" stroke-width="3" stroke-linecap="round"/>
+              <path d="M70 128c10 8 50 8 60 0v8c-10 8-50 8-60 0z" fill="#ff6b35"/>
+            </svg>
+          </div>
+          <div class="post-actions">
+            <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="#ff6b35" stroke="#ff6b35" stroke-width="2"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="caption"><b>Biscuit</b> new bandana, who dis <span class="tagged">#corgi</span></p>
+        </div>
+        <div class="tabs"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="band stats" aria-label="By the numbers">
+    <div><b>3</b><span>platforms, one codebase</span></div>
+    <div><b>177k</b><span>lines of TypeScript</span></div>
+    <div><b>~450</b><span>test files and E2E specs</span></div>
+    <div><b>~$50</b><span>a month to run</span></div>
   </section>
 
-  <!-- Measurements -->
-  <section class="specs" aria-label="By the numbers">
-    <div><span class="num">177k</span><span class="unit">lines of TypeScript</span></div>
-    <div><span class="num">40</span><span class="unit">or so Lambda functions</span></div>
-    <div><span class="num">450</span><span class="unit">or so test files and E2E specs</span></div>
-    <div><span class="num">$50</span><span class="unit">a month to run, roughly</span></div>
-  </section>
-
-  <!-- Key features as numbered callouts -->
   <section class="section">
-    <h2><span class="tag">A</span>What it does</h2>
-    <div class="callouts">
+    <div class="section-head">
+      <p class="eyebrow">The app</p>
+      <h2>Dogs are the main characters.</h2>
+      <p>People follow dogs, not other people. One person can run several dogs, and a dog can have co-owners: a couple, a family or the dog walker.</p>
+    </div>
+    <div class="features">
       <article>
-        <h3><span class="mark">1</span>Dogs are the accounts</h3>
-        <p>People follow dogs, not other people. One person can run several dogs, and a dog can have co-owners: a couple, a family or a dog walker, with an invite and accept flow.</p>
-      </article>
-      <article>
-        <h3><span class="mark">2</span>Posts, reels and stories</h3>
+        <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2"/><path d="m21 16-5-5-8 8"/></svg></span>
+        <h3>Posts, reels and stories</h3>
         <p>Photo and video carousels, a GPU photo editor with filters and non-destructive edits, a video trimmer, drafts, and 24-hour stories with text, stickers and drawing.</p>
       </article>
       <article>
-        <h3><span class="mark">3</span>Real-time messaging</h3>
-        <p>One-to-one and group DMs over WebSockets, with message requests, read receipts, mute and admin roles. Push notifications deep-link to the right screen.</p>
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span>
+        <h3>Real-time messaging</h3>
+        <p>One-to-one and group DMs with message requests, read receipts and mute. Push notifications open the right screen.</p>
       </article>
       <article>
-        <h3><span class="mark">4</span>Explore and Discuss</h3>
-        <p>A ranked global feed that blends engagement with recency decay, hashtag pages, typo-tolerant search, and a community forum with threads and polls.</p>
+        <span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+        <h3>Explore and Discuss</h3>
+        <p>A ranked feed of the best posts right now, hashtag pages, typo-tolerant search, and a community forum with threads and polls.</p>
       </article>
       <article>
-        <h3><span class="mark">5</span>Your dog, as a cartoon</h3>
-        <p>Snap a photo and a vision model reads breed, build, coat and markings. That drives a dog drawn entirely in code: one SVG rig, tuned per breed, with six coat patterns and unlockable accessories.</p>
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M5 9 4 3l5 3M19 9l1-6-5 3"/><path d="M5 11c0-4 3-6 7-6s7 2 7 6c0 5-3 9-7 9s-7-4-7-9z"/><path d="M10 12h.01M14 12h.01M11 15h2"/></svg></span>
+        <h3>Your dog, as a cartoon</h3>
+        <p>Snap a photo and AI reads the breed, coat and markings, then draws your dog in code. Dress it up with collars, bandanas and hats you unlock by posting.</p>
       </article>
       <article>
-        <h3><span class="mark">6</span>Dogs only, and safe</h3>
-        <p>Every report goes to a multimodal AI moderator that enforces the dogs-only rule and the safety rules. When it isn't sure, it escalates to a human instead of removing.</p>
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <h3>Dogs only, and safe</h3>
+        <p>Every report goes to an AI moderator that keeps things on-topic and safe. When it isn't sure, a human makes the call.</p>
+      </article>
+      <article>
+        <span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 14c3 0 6 1.5 6 4.5"/></svg></span>
+        <h3>Shared dogs</h3>
+        <p>Invite co-owners to a dog's profile so everyone who loves that dog can post as it.</p>
       </article>
     </div>
   </section>
 
-  <!-- Architecture as a schematic -->
-  <section class="section">
-    <h2><span class="tag">B</span>Schematic</h2>
-    <p class="note">One TypeScript monorepo, five packages. Zod schemas are shared by the app and the API, so validation is identical on both sides.</p>
-    <figure class="schematic">
+  <section class="dark">
+    <div class="section">
+      <div class="section-head">
+        <p class="eyebrow">Under the hood</p>
+        <h2>Production-grade, startup-cheap.</h2>
+        <p>I designed, built and run Pupprs on my own: a TypeScript monorepo with a universal Expo app, a serverless AWS backend, and all infrastructure in CDK.</p>
+      </div>
+
+      <figure class="diagram">
 <pre aria-label="Architecture diagram">
  iOS / Android / Web  (Expo + React Native)
           │  HTTPS + WSS
@@ -110,59 +141,61 @@
    Alarms    ─► SNS ─► alarm bridge ─► GitHub Issues
    CodePipeline ─► synth tests ─► approval ─► prod ─► smoke test
 </pre>
-      <figcaption>Fig. B1. Request, event and async paths. Every queue has a dead-letter queue with alarms.</figcaption>
-    </figure>
-  </section>
+        <figcaption>Request, event and async paths. Every queue has a dead-letter queue with alarms.</figcaption>
+      </figure>
 
-  <!-- Engineering stories as detail views -->
-  <section class="section">
-    <h2><span class="tag">C</span>Details</h2>
-    <div class="details">
-      <article>
-        <h3>Detail C1 · Cutting RDS Proxy</h3>
-        <p>Lambdas talk to Postgres directly with a pool of exactly one connection per warm container. Idle reaping on the server and an alarm on connection count keep it inside a micro instance. That, a NAT instance instead of a NAT Gateway, and tight log and trace sampling keep the bill near $50 a month.</p>
-      </article>
-      <article>
-        <h3>Detail C2 · Moderation that resists prompt injection</h3>
-        <p>User captions are untrusted input to an LLM. They go in delimited blocks, and delimiter sequences inside them are neutralised, so a crafted caption can't break out and inject instructions or fake a verdict.</p>
-      </article>
-      <article>
-        <h3>Detail C3 · One ID from tap to database</h3>
-        <p>Every request carries a correlation ID. A Sentry error in the browser links to every Lambda log line it caused with one paste into Logs Insights.</p>
-      </article>
-      <article>
-        <h3>Detail C4 · Alarms that file their own tickets</h3>
-        <p>CloudWatch alarms open labelled GitHub issues, fold flapping alarms into one thread, and close the issue when the alarm clears. A backstop alarm emails if the bridge itself breaks.</p>
-      </article>
-      <article>
-        <h3>Detail C5 · Built with AI agents</h3>
-        <p>Features are built with Claude Code. Every pull request gets four parallel AI reviews (security, scalability, code quality and a user persona) and ships with a Playwright test run against the deployed stack.</p>
-      </article>
+      <div class="stories-grid">
+        <article>
+          <h3>Cutting RDS Proxy</h3>
+          <p>Lambdas talk to Postgres directly with a pool of one connection per warm container. Idle reaping and a connection alarm keep it inside a micro instance, which, with a NAT instance and tight log sampling, keeps the bill near $50 a month.</p>
+        </article>
+        <article>
+          <h3>Moderation that resists prompt injection</h3>
+          <p>Captions are untrusted input to an LLM. They go in delimited blocks with delimiter sequences neutralised, so a crafted caption can't inject instructions or fake a verdict.</p>
+        </article>
+        <article>
+          <h3>A dog drawn entirely in code</h3>
+          <p>A vision model returns breed, coat and markings as strict JSON. That drives one parametric SVG rig, tuned per breed, with six coat patterns and no image assets.</p>
+        </article>
+        <article>
+          <h3>One ID from tap to database</h3>
+          <p>Every request carries a correlation ID, so a Sentry error in the browser links to every Lambda log line it caused with one paste into Logs Insights.</p>
+        </article>
+        <article>
+          <h3>Alarms that file their own tickets</h3>
+          <p>CloudWatch alarms open labelled GitHub issues, fold flapping alarms into one thread, and close the issue when the alarm clears.</p>
+        </article>
+        <article>
+          <h3>Built with AI agents</h3>
+          <p>Features are built with Claude Code. Every pull request gets four parallel AI reviews and ships with Playwright tests run against the deployed stack.</p>
+        </article>
+      </div>
+
+      <div class="stack">
+        <h3>Built with</h3>
+        <ul>
+          <li>TypeScript</li><li>React Native</li><li>Expo</li><li>React 19</li><li>TanStack Query</li><li>NativeWind</li><li>Skia</li><li>Reanimated</li>
+          <li>AWS Lambda</li><li>API Gateway</li><li>PostgreSQL</li><li>DynamoDB</li><li>S3</li><li>SQS</li><li>EventBridge</li><li>Cognito</li>
+          <li>Amazon Bedrock</li><li>AWS CDK</li><li>CloudFront</li><li>WAF</li><li>CloudWatch</li><li>X-Ray</li><li>Sentry</li>
+          <li>Vitest</li><li>Jest</li><li>Playwright</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- Parts list -->
-  <section class="section">
-    <h2><span class="tag">D</span>Parts list</h2>
-    <div class="parts-wrap">
-      <table class="parts">
-        <thead><tr><th scope="col">Item</th><th scope="col">Part</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Client</th><td>TypeScript, React Native, Expo, Expo Router, React 19, TanStack Query, NativeWind, Skia, Reanimated, Sentry</td></tr>
-          <tr><th scope="row">Backend</th><td>Node.js, AWS Lambda, API Gateway (REST and WebSocket), PostgreSQL on RDS, DynamoDB, S3, SQS, EventBridge, Cognito, SES, Zod</td></tr>
-          <tr><th scope="row">AI</th><td>Amazon Bedrock (Converse API, multimodal)</td></tr>
-          <tr><th scope="row">Infra and ops</th><td>AWS CDK, CodePipeline, CloudFront, WAF, CloudWatch, X-Ray, Powertools, Synthetics, KMS, Secrets Manager</td></tr>
-          <tr><th scope="row">Testing</th><td>Vitest, Jest, React Native Testing Library, Playwright</td></tr>
-        </tbody>
-      </table>
+  <section class="closing">
+    <h2>Join the pack.</h2>
+    <p>Bring a dog. Or a few.</p>
+    <div class="cta">
+      <a class="pill solid" href="https://apps.apple.com/us/app/pupprs/id6769940714">App Store</a>
+      <a class="pill solid" href="https://play.google.com/store/apps/details?id=com.pupprs.app">Google Play</a>
+      <a class="pill ghost" href="https://pupprs.com/">pupprs.com</a>
     </div>
-  </section>
-
-  <section class="plate closing">
-    <p>See it for yourself. Bring a dog.</p>
-    <a class="btn" href="https://pupprs.com/">Visit pupprs.com &gt;</a>
   </section>
 
 </main>
+
+<footer class="foot"><a href="/projects/">&lt; Back to Riley's projects</a></footer>
+
 </body>
 </html>

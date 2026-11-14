@@ -8,8 +8,8 @@ Static front end for rileycohn.com. No build step: plain HTML, CSS and JS.
   cartridges, each a link to a game. To add one, copy a `.cart` link there.
 - `/projects/` is the workshop (`projects/index.html`, `css/workshop.css`): each
   project is a blueprint sheet. To add one, copy a `.sheet` link there.
-  A sheet can open a detail page at `/projects/<name>/` (see `projects/pupprs/`,
-  styled by `css/drawing.css`).
+  A sheet can open a project page at `/projects/<name>/`. Each project page is
+  styled to match that project (see `projects/pupprs/`).
 - The games themselves are deployed separately under `/games/<name>/` (for
   example `/games/duel-dle/`) and are not in this repo, so a deploy of this repo
   must never delete those folders.

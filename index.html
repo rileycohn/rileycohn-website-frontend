@@ -1,58 +1,120 @@
-<!DOCTYPE html>
-<html class="no-js" lang="">
-  <head>
-    <meta charset="utf-8" />
-    <title></title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Riley Cohn</title>
+<meta name="description" content="Riley Cohn's personal site: a tiny desktop computer with games inside.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e3d3a8">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap">
+<link rel="stylesheet" href="/css/os.css">
+</head>
+<body>
 
-    <link rel="manifest" href="site.webmanifest" />
-    <link rel="apple-touch-icon" href="icon.png" />
-    <!-- Place favicon.ico in the root directory -->
+<header class="menubar">
+  <button class="logo" data-open="about">RileyOS</button>
+  <a href="/games/">Games</a>
+  <button data-open="projects">Projects</button>
+  <button data-open="now">Now</button>
+  <button data-open="terminal">Terminal</button>
+  <span class="spacer"></span>
+  <button id="mode">Plain version</button>
+  <button id="ach-count" data-open="achievements">Achievements</button>
+  <span id="clock"></span>
+</header>
 
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/main.css" />
+<main class="desktop" id="desktop">
 
-    <meta name="theme-color" content="#fafafa" />
-  </head>
+  <nav class="icons" aria-label="Desktop">
+    <a class="icon" href="/games/"><span class="tile" style="background: var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="4"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/></svg></span><span class="label">Games</span></a>
+    <button class="icon" data-open="projects"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></button>
+    <button class="icon" data-open="now"><span class="tile" style="background: var(--blue)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="label">Now</span></button>
+    <button class="icon" data-open="lab"><span class="tile" style="background: var(--green)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 10a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2l-5-10V3"/></svg></span><span class="label">Lab</span></button>
+    <button class="icon" data-open="guestbook"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h13v16H5zM9 4v16"/></svg></span><span class="label">Guestbook</span></button>
+    <button class="icon" data-open="trash"><span class="tile" style="background: #cdbf9a"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></span><span class="label">Trash</span></button>
+  </nav>
 
-  <body>
-    <!--[if IE]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
+  <!-- TODO(Riley): replace the [BRACKETED] text below with your own words. -->
 
-    <!-- Add your site or application content here -->
-    <p>Hello world! This is HTML5 Boilerplate.</p>
-    <script src="js/vendor/modernizr-3.8.0.min.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      window.jQuery ||
-        document.write(
-          '<script src="js/vendor/jquery-3.4.1.min.js"><\/script>'
-        );
-    </script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+  <section class="window" id="w-about" data-x="150" data-y="36" style="width: 500px">
+    <div class="titlebar"><button class="close" aria-label="Close About">x</button><span class="title">About Riley.txt</span></div>
+    <div class="content">
+      <h1>Hi, I'm Riley Cohn.</h1>
+      <p>[YOUR ONE-LINE BIO]. This whole site is a tiny computer. Click anything, drag the windows around, and see what you can find.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="/games/">Play a game</a>
+        <button class="btn" data-mode>Plain version</button>
+      </div>
+    </div>
+  </section>
 
-    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-    <script>
-      window.ga = function () {
-        ga.q.push(arguments);
-      };
-      ga.q = [];
-      ga.l = +new Date();
-      ga("create", "UA-XXXXX-Y", "auto");
-      ga("set", "transport", "beacon");
-      ga("send", "pageview");
-    </script>
-    <script src="https://www.google-analytics.com/analytics.js" async></script>
-  </body>
+  <section class="window" id="w-projects" data-x="560" data-y="150" hidden>
+    <div class="titlebar"><button class="close" aria-label="Close Projects">x</button><span class="title">/projects</span></div>
+    <div class="content">
+      <h2>Projects</h2>
+      <ul>
+        <li>[PROJECT 1]: [WHAT IT IS]</li>
+        <li>[PROJECT 2]: [WHAT IT IS]</li>
+        <li><a href="/games/">The arcade</a>: small games I built for fun</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="window" id="w-now" data-x="700" data-y="60" style="width: 380px" hidden>
+    <div class="titlebar"><button class="close" aria-label="Close Now">x</button><span class="title">now.txt</span></div>
+    <div class="content">
+      <h2>Now</h2>
+      <p id="now-text">[WHAT YOU'RE UP TO THIS MONTH]</p>
+    </div>
+  </section>
+
+  <section class="window" id="w-lab" data-x="420" data-y="230" style="width: 400px" hidden>
+    <div class="titlebar"><button class="close" aria-label="Close Lab">x</button><span class="title">/lab</span></div>
+    <div class="content">
+      <h2>Lab</h2>
+      <p>Half-finished experiments go here. Nothing has escaped yet.</p>
+    </div>
+  </section>
+
+  <section class="window" id="w-guestbook" data-x="480" data-y="120" style="width: 400px" hidden>
+    <div class="titlebar"><button class="close" aria-label="Close Guestbook">x</button><span class="title">Guestbook</span></div>
+    <div class="content">
+      <h2>Guestbook</h2>
+      <p>Coming soon. The pen is still being sharpened.</p>
+    </div>
+  </section>
+
+  <section class="window no-plain" id="w-trash" data-x="300" data-y="200" style="width: 420px" hidden>
+    <div class="titlebar"><button class="close" aria-label="Close Trash">x</button><span class="title">Trash</span></div>
+    <div class="content">
+      <p>1 item</p>
+      <p><b>old_homepage.html</b><br>"Hello world! This is HTML5 Boilerplate."</p>
+    </div>
+  </section>
+
+  <section class="window no-plain" id="w-achievements" data-x="640" data-y="80" style="width: 420px" hidden>
+    <div class="titlebar"><button class="close" aria-label="Close Achievements">x</button><span class="title">Achievements</span></div>
+    <div class="content"><ul class="ach-list" id="ach-list"></ul></div>
+  </section>
+
+  <section class="window terminal" id="w-terminal" data-x="230" data-y="390" style="width: 520px">
+    <div class="titlebar"><button class="close" aria-label="Close Terminal">x</button><span class="title">Terminal</span></div>
+    <div class="content" id="term">
+      <div id="term-log"><div class="out">Type help and press Enter.</div></div>
+      <form id="term-form" autocomplete="off">
+        <label for="term-input"><span class="who">guest@rileycohn.com</span> ~ %</label>
+        <input id="term-input" spellcheck="false" autocapitalize="off">
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<script src="/js/achievements.js"></script>
+<script src="/js/os.js"></script>
+</body>
 </html>

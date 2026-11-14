@@ -2,7 +2,8 @@
 
 Static front end for rileycohn.com. No build step: plain HTML, CSS and JS.
 
-- `/` is RileyOS, a pixel desktop (`index.html`, `css/os.css`, `js/os.js`).
+- `/` is RileyOS (`index.html`, `css/os.css`, `js/os.js`): a pixel desktop on wide
+  screens and a phone-style home screen with full-screen apps below 720px.
 - `/games/` is the arcade (`games/index.html`, `css/arcade.css`): a shelf of
   cartridges, each a link to a game. To add one, copy a `.cart` link there.
 - The games themselves are deployed separately under `/games/<name>/` (for

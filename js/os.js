@@ -1,4 +1,4 @@
-// RileyOS desktop: windows, clock, terminal, plain mode.
+// RileyOS: desktop windows, phone home screen, clock, terminal, plain mode.
 (function () {
   var desktop = document.getElementById('desktop');
   var root = document.documentElement;
@@ -13,14 +13,20 @@
     w.style.top = Math.min(Math.max(0, parseFloat(w.style.top) || 0), maxY) + 'px';
   }
   function focus(w) { w.style.zIndex = ++z; }
+  function isPhone() { return root.classList.contains('phone'); }
+  // On a phone only one app is open at a time; About stays on the home screen as a widget.
+  function closeApps() {
+    document.querySelectorAll('.window').forEach(function (w) { w.hidden = w.id !== 'w-about'; });
+  }
   function open(name) {
     var w = win(name);
     if (!w) return false;
+    if (isPhone()) closeApps();
     w.hidden = false;
-    clamp(w);
+    if (!isPhone()) clamp(w);
     focus(w);
     if (name === 'trash') Ach.unlock('diver');
-    if (name === 'terminal' && !root.classList.contains('plain')) input.focus({ preventScroll: true });
+    if (name === 'terminal' && !root.classList.contains('plain') && !isPhone()) input.focus({ preventScroll: true });
     if (root.classList.contains('plain')) w.scrollIntoView({ behavior: 'smooth' });
     return true;
   }
@@ -33,7 +39,7 @@
 
     var bar = w.querySelector('.titlebar');
     bar.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('.close') || root.classList.contains('plain')) return;
+      if (e.target.closest('.close') || root.classList.contains('plain') || isPhone()) return;
       var dx = e.clientX - w.offsetLeft, dy = e.clientY - w.offsetTop, moved = false;
       bar.setPointerCapture(e.pointerId);
       function move(ev) {
@@ -71,7 +77,16 @@
   document.querySelectorAll('[data-mode]').forEach(function (b) {
     b.addEventListener('click', function () { setPlain(true); });
   });
-  setPlain(window.matchMedia('(max-width: 720px)').matches);
+
+  // ---- Phone mode ----
+  var narrow = window.matchMedia('(max-width: 720px)');
+  function setPhone() {
+    root.classList.toggle('phone', narrow.matches);
+    if (narrow.matches) { setPlain(false); closeApps(); }
+    else document.querySelectorAll('.window:not([hidden])').forEach(clamp);
+  }
+  narrow.addEventListener('change', setPhone);
+  setPhone();
 
   // ---- Clock ----
   var clock = document.getElementById('clock');

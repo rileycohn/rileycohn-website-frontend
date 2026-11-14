@@ -30,8 +30,8 @@
 <main class="desktop" id="desktop">
 
   <nav class="icons" aria-label="Desktop">
-    <a class="icon" href="/games/"><span class="tile" style="background: var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="4"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/></svg></span><span class="label">Games</span></a>
-    <button class="icon" data-open="projects"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></button>
+    <a class="icon in-dock" href="/games/"><span class="tile" style="background: var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="4"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/></svg></span><span class="label">Games</span></a>
+    <button class="icon in-dock" data-open="projects"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></button>
     <button class="icon" data-open="now"><span class="tile" style="background: var(--blue)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="label">Now</span></button>
     <button class="icon" data-open="lab"><span class="tile" style="background: var(--green)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 10a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2l-5-10V3"/></svg></span><span class="label">Lab</span></button>
     <button class="icon" data-open="guestbook"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h13v16H5zM9 4v16"/></svg></span><span class="label">Guestbook</span></button>
@@ -44,7 +44,7 @@
     <div class="titlebar"><button class="close" aria-label="Close About">x</button><span class="title">About Riley.txt</span></div>
     <div class="content">
       <h1>Hi, I'm Riley Cohn.</h1>
-      <p>[YOUR ONE-LINE BIO]. This whole site is a tiny computer. Click anything, drag the windows around, and see what you can find.</p>
+      <p>[YOUR ONE-LINE BIO]. This whole site is a tiny computer. Open anything, poke around, and see what you can find.</p>
       <div class="btn-row">
         <a class="btn primary" href="/games/">Play a game</a>
         <button class="btn" data-mode>Plain version</button>
@@ -111,6 +111,13 @@
       </form>
     </div>
   </section>
+
+  <nav class="dock" aria-label="Dock">
+    <a class="icon" href="/games/"><span class="tile" style="background: var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="4"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/></svg></span><span class="label">Games</span></a>
+    <button class="icon" data-open="projects"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></button>
+    <button class="icon" data-open="terminal"><span class="tile" style="background: var(--ink); color: var(--paper)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 10l3 2-3 2M12 15h4"/></svg></span><span class="label">Terminal</span></button>
+    <button class="icon" data-open="achievements"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM12 14v4M8 20h8M7 6H4c0 3 1 4 3 4M17 6h3c0 3-1 4-3 4"/></svg></span><span class="label">Trophies</span></button>
+  </nav>
 
 </main>
 

@@ -99,7 +99,40 @@ ul { padding-left: 22px; }
 .ach-list .box { font-family: var(--pixel); font-size: 13px; }
 .ach-list .locked { color: #6b6250; }
 
-/* Plain mode: the same windows as one readable column. Also used on phones. */
+.dock { display: none; }
+
+/* Phone mode: status bar, a hello widget, an app grid and a dock. Apps open full screen. */
+.phone .menubar { flex-wrap: nowrap; height: 40px; }
+.phone .menubar > :not(.logo):not(.spacer):not(#clock) { display: none; }
+.phone .desktop { overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 20px; }
+.phone .icons, .phone .dock {
+  position: static; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 4px;
+  font: 11px var(--pixel);
+}
+.phone .icons .in-dock { display: none; }
+.phone .icon { width: auto; padding: 0; }
+.phone .icon .tile { width: 60px; height: 60px; box-shadow: 3px 3px 0 var(--ink); }
+.phone .icon svg { width: 36px; height: 36px; }
+.phone .dock {
+  margin-top: auto; padding: 12px 8px 8px; background: var(--paper);
+  border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+}
+.phone .window {
+  position: fixed !important; left: 0 !important; top: 40px !important; right: 0; bottom: 0; z-index: 50 !important;
+  width: auto !important; max-width: none; border: 0; box-shadow: none; display: flex; flex-direction: column;
+}
+.phone .window[hidden] { display: none; }
+.phone .titlebar { height: 48px; flex: none; cursor: default; }
+.phone .titlebar .close { left: 6px; top: 5px; width: 38px; height: 38px; font-size: 0; }
+.phone .titlebar .close::before { content: '<'; font-size: 16px; }
+.phone .content { flex: 1; max-height: none; }
+.phone .terminal .content { height: auto; }
+.phone #w-about { position: static !important; display: block; order: -1; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
+.phone #w-about .titlebar, .phone [data-mode] { display: none; }
+.phone #w-about .content { padding: 18px 20px 20px; }
+.phone #w-about h1 { font-size: 28px; }
+
+/* Plain mode: the same windows as one readable column. */
 .plain body { display: block; height: auto; }
 .plain .desktop { overflow: visible; max-width: 640px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 20px; }
 .plain .icons { position: static; flex-direction: row; justify-content: center; }

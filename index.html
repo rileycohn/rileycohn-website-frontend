@@ -18,7 +18,7 @@
 <header class="menubar">
   <button class="logo" data-open="about">RileyOS</button>
   <a href="/games/">Games</a>
-  <button data-open="projects">Projects</button>
+  <a href="/projects/">Projects</a>
   <button data-open="now">Now</button>
   <button data-open="terminal">Terminal</button>
   <span class="spacer"></span>
@@ -30,7 +30,7 @@
 
   <nav class="icons" aria-label="Desktop">
     <a class="icon in-dock" href="/games/"><span class="tile" style="background: var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="4"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/></svg></span><span class="label">Games</span></a>
-    <button class="icon in-dock" data-open="projects"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></button>
+    <a class="icon in-dock" href="/projects/"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></a>
     <button class="icon" data-open="now"><span class="tile" style="background: var(--blue)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="label">Now</span></button>
     <button class="icon" data-open="lab"><span class="tile" style="background: var(--green)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 10a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2l-5-10V3"/></svg></span><span class="label">Lab</span></button>
     <button class="icon" data-open="guestbook"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h13v16H5zM9 4v16"/></svg></span><span class="label">Guestbook</span></button>
@@ -48,18 +48,6 @@
         <a class="btn primary" href="/games/">Play a game</a>
         <button class="btn" data-mode>Plain version</button>
       </div>
-    </div>
-  </section>
-
-  <section class="window" id="w-projects" data-x="560" data-y="150" hidden>
-    <div class="titlebar"><button class="close" aria-label="Close Projects">x</button><span class="title">/projects</span></div>
-    <div class="content">
-      <h2>Projects</h2>
-      <ul>
-        <li>[PROJECT 1]: [WHAT IT IS]</li>
-        <li>[PROJECT 2]: [WHAT IT IS]</li>
-        <li><a href="/games/">The arcade</a>: small games I built for fun</li>
-      </ul>
     </div>
   </section>
 
@@ -108,7 +96,7 @@
 
   <nav class="dock" aria-label="Dock">
     <a class="icon" href="/games/"><span class="tile" style="background: var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="4"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/></svg></span><span class="label">Games</span></a>
-    <button class="icon" data-open="projects"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></button>
+    <a class="icon" href="/projects/"><span class="tile" style="background: var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span><span class="label">Projects</span></a>
     <button class="icon" data-open="terminal"><span class="tile" style="background: var(--ink); color: var(--paper)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 10l3 2-3 2M12 15h4"/></svg></span><span class="label">Terminal</span></button>
   </nav>
 

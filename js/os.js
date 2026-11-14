@@ -101,7 +101,7 @@
   var log = document.getElementById('term-log');
   var form = document.getElementById('term-form');
   var input = document.getElementById('term-input');
-  var apps = ['projects', 'now', 'lab', 'guestbook', 'trash', 'about'];
+  var apps = ['now', 'lab', 'guestbook', 'trash', 'about'];
 
   function print(text, cls) {
     var d = document.createElement('div');
@@ -120,12 +120,12 @@
     secret: function () { return 'You found it.'; },
     cd: function (arg) {
       var dir = (arg || '').replace(/\/$/, '');
-      if (dir === 'games') { location.href = '/games/'; return 'Loading arcade...'; }
+      if (dir === 'games' || dir === 'projects') { location.href = '/' + dir + '/'; return 'Loading ' + dir + '...'; }
       if (apps.indexOf(dir) >= 0) { open(dir); return; }
       return 'cd: no such directory: ' + (arg || '');
     },
     open: function (arg) {
-      if (arg === 'games') return commands.cd('games');
+      if (arg === 'games' || arg === 'projects') return commands.cd(arg);
       return open(arg) ? undefined : 'open: no such app: ' + (arg || '');
     },
     cat: function (arg) {

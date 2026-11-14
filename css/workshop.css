@@ -1,0 +1,60 @@
+/* Workshop: projects as blueprint sheets on drafting-blue grid paper. */
+:root {
+  --blue: #17457a; --blue-deep: #103560; --line: #f2f7ff; --faint: #a9c6ea; --chalk: #ffe27a;
+  --pixel: 'Silkscreen', monospace; --mono: 'VT323', monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100vh; color: var(--line); font: 22px/1.2 var(--mono);
+  background-color: var(--blue);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 16px 16px, 16px 16px;
+}
+:focus-visible { outline: 3px dashed var(--chalk); outline-offset: 5px; }
+h1, p, dl, dd { margin: 0; }
+
+.topbar { padding: 12px 16px 0; font: 14px var(--pixel); }
+.topbar a { color: var(--faint); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+.topbar a:hover { color: var(--line); }
+
+.workshop { max-width: 1040px; margin: 0 auto; padding: 16px 16px 72px; display: flex; flex-direction: column; gap: 40px; }
+.heading { display: flex; flex-direction: column; gap: 10px; padding-bottom: 20px; border-bottom: 2px dashed var(--faint); }
+.heading h1 { font: 700 clamp(30px, 7vw, 56px)/1.1 var(--pixel); text-wrap: balance; }
+.heading p { color: var(--faint); max-width: 40ch; }
+
+.sheets { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 36px 32px; }
+.sheet {
+  display: flex; flex-direction: column; color: var(--line); text-decoration: none;
+  background: var(--blue-deep); border: 2px solid var(--line); outline: 2px solid var(--line); outline-offset: 5px;
+  transition: transform 0.15s;
+}
+a.sheet:hover, a.sheet:focus-visible { transform: translateY(-6px) rotate(-1deg); }
+a.sheet:focus-visible { outline: 3px dashed var(--chalk); }
+
+.drawing { display: block; width: 100%; padding: 12px; fill: none; stroke: var(--line); stroke-width: 2; }
+.drawing .dim { stroke: var(--chalk); stroke-width: 1; }
+.drawing text { fill: var(--chalk); stroke: none; font: 9px var(--pixel); paint-order: stroke; stroke: var(--blue-deep); stroke-width: 6px; }
+
+.titleblock { display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--line); margin-top: auto; }
+.titleblock > div { padding: 8px 12px 10px; border-bottom: 2px solid var(--line); }
+.titleblock > div:not(.wide):nth-of-type(odd) { border-right: 2px solid var(--line); }
+.titleblock .wide { grid-column: 1 / -1; }
+.titleblock dt { font: 10px var(--pixel); color: var(--faint); text-transform: uppercase; letter-spacing: 1px; }
+.titleblock .name { font: 700 24px/1.2 var(--pixel); }
+.titleblock .open {
+  border-bottom: 0; min-height: 44px; display: flex; align-items: center; justify-content: flex-end;
+  font: 700 14px var(--pixel); color: var(--chalk);
+}
+a.sheet:hover .open { background: var(--chalk); color: var(--blue-deep); }
+
+.sheet.blank {
+  min-height: 260px; align-items: center; justify-content: center; padding: 16px; text-align: center;
+  background: none; color: var(--faint); border-style: dashed; border-color: var(--faint); outline: 0;
+}
+
+@media (prefers-reduced-motion: reduce) { .sheet { transition: none; } }
